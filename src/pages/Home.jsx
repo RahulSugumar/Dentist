@@ -596,37 +596,6 @@ const Home = () => {
             </section>
 
             {/* Scrolling Marquee Section */}
-            <div style={{
-                background: 'var(--color-text-primary)',
-                color: 'var(--color-white)',
-                padding: '1.5rem 0',
-                overflow: 'hidden',
-                whiteSpace: 'nowrap',
-                position: 'relative',
-                zIndex: 10
-            }}>
-                <div className="marquee-content" style={{ display: 'inline-block' }}>
-                    {[...Array(4)].map((_, i) => (
-                        <span key={i} style={{
-                            display: 'inline-block',
-                            fontSize: '1.5rem',
-                            fontWeight: '700',
-                            textTransform: 'uppercase',
-                            letterSpacing: '2px',
-                            fontFamily: 'var(--font-heading)',
-                            marginRight: '4rem'
-                        }}>
-                            PAIN-FREE DENTISTRY <span style={{ color: 'red', margin: '0 1rem', opacity: 1 }}>•</span>
-                            COSMETIC SPECIALISTS <span style={{ color: 'var(--color-accent)', margin: '0 1rem', opacity: 1 }}>•</span>
-                            ADVANCED TECHNOLOGY <span style={{ color: 'var(--color-accent)', margin: '0 1rem', opacity: 1 }}>•</span>
-                            15+ YEARS EXPERIENCE <span style={{ color: 'var(--color-accent)', margin: '0 1rem', opacity: 1 }}>•</span>
-                            500+ HAPPY PATIENTS <span style={{ color: 'var(--color-accent)', margin: '0 1rem', opacity: 1 }}>•</span>
-                        </span>
-                    ))}
-                </div>
-            </div>
-
-            {/* Services Highlight Section */}
             <section className="section" style={{
                 background: 'radial-gradient(circle at 50% 50%, #fafafa 0%, #f0f0f0 100%)',
                 position: 'relative',
