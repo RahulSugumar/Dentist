@@ -12,6 +12,7 @@ const Home = () => {
     const titleRef = useRef(null);
     const textRef = useRef(null);
     const btnRef = useRef(null);
+    const bookingCardRef = useRef(null);
 
     // Section Refs
     const servicesRef = useRef(null);
@@ -41,7 +42,22 @@ const Home = () => {
                 { scale: 0.8, opacity: 0 },
                 { scale: 1, opacity: 1, duration: 0.5 },
                 "-=0.4"
+            )
+            .fromTo(bookingCardRef.current,
+                { y: 50, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.8 },
+                "-=0.6"
             );
+
+        // Booking Card Float Animation
+        gsap.to(bookingCardRef.current, {
+            y: -15,
+            duration: 3,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+            delay: 1
+        });
 
         // Hero Mouse Move Parallax
         const handleMouseMove = (e) => {
@@ -104,7 +120,7 @@ const Home = () => {
             // Image Side
             tl.fromTo(q(".doctor-image-side"),
                 { x: -50, opacity: 0 },
-                { x: 0, opacity: 1, duration: 1, ease: "power3.out" }
+                { x: 0, opacity: 1, duration: 2, ease: "power3.out" }
             );
 
             // Content Side
@@ -120,6 +136,15 @@ const Home = () => {
                 { x: 0, opacity: 1, duration: 0.5, stagger: 0.1 },
                 "-=0.5"
             );
+
+            // Floating Animation for Doctor Image
+            gsap.to(q(".doctor-image-side"), {
+                y: -20,
+                duration: 1,
+                ease: "sine.inOut",
+                repeat: -1,
+                yoyo: true
+            });
         }
 
         // Testimonials Animation
@@ -184,7 +209,7 @@ const Home = () => {
             // Continuous Floating Animation for Icons
             gsap.to(q(".feature-icon"), {
                 y: -10,
-                duration: 2,
+                duration: 1,
                 repeat: -1,
                 yoyo: true,
                 ease: "sine.inOut",
@@ -193,6 +218,8 @@ const Home = () => {
                     from: "random"
                 }
             });
+
+
         }
 
         // Parallax Effect for Hero Background
@@ -207,6 +234,14 @@ const Home = () => {
             }
         });
 
+        // Marquee Animation
+        gsap.to(".marquee-content", {
+            xPercent: -50,
+            ease: "none",
+            duration: 20,
+            repeat: -1
+        });
+
         // Global Ambient Animations
         const ambientTl = gsap.timeline({ repeat: -1, yoyo: true });
 
@@ -214,7 +249,7 @@ const Home = () => {
         gsap.to(".global-orb-1", {
             x: "20vw",
             y: "10vh",
-            duration: 15,
+            duration: 8,
             ease: "sine.inOut",
             repeat: -1,
             yoyo: true
@@ -224,22 +259,22 @@ const Home = () => {
         gsap.to(".global-orb-2", {
             x: "-15vw",
             y: "20vh",
-            duration: 20,
+            duration: 10,
             ease: "sine.inOut",
             repeat: -1,
             yoyo: true,
-            delay: 2
+            delay: 1
         });
 
         // Orb 3 Animation
         gsap.to(".global-orb-3", {
             x: "10vw",
             y: "-15vh",
-            duration: 18,
+            duration: 9,
             ease: "sine.inOut",
             repeat: -1,
             yoyo: true,
-            delay: 1
+            delay: 0.5
         });
 
         return () => {
@@ -470,7 +505,7 @@ const Home = () => {
                             </div>
 
                             {/* Quick Booking Card - Premium Glassmorphism */}
-                            <div style={{
+                            <div ref={bookingCardRef} style={{
                                 position: 'absolute',
                                 bottom: '40px',
                                 left: '-60px',
@@ -482,8 +517,7 @@ const Home = () => {
                                 boxShadow: '0 20px 50px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5)',
                                 zIndex: 2,
                                 maxWidth: '340px',
-                                border: '1px solid rgba(255, 255, 255, 0.6)',
-                                animation: 'float 6s ease-in-out infinite'
+                                border: '1px solid rgba(255, 255, 255, 0.6)'
                             }}>
                                 <div style={{
                                     display: 'flex',
@@ -560,6 +594,37 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Scrolling Marquee Section */}
+            <div style={{
+                background: 'var(--color-text-primary)',
+                color: 'var(--color-white)',
+                padding: '1.5rem 0',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                position: 'relative',
+                zIndex: 10
+            }}>
+                <div className="marquee-content" style={{ display: 'inline-block' }}>
+                    {[...Array(4)].map((_, i) => (
+                        <span key={i} style={{
+                            display: 'inline-block',
+                            fontSize: '1.5rem',
+                            fontWeight: '700',
+                            textTransform: 'uppercase',
+                            letterSpacing: '2px',
+                            fontFamily: 'var(--font-heading)',
+                            marginRight: '4rem'
+                        }}>
+                            PAIN-FREE DENTISTRY <span style={{ color: 'red', margin: '0 1rem', opacity: 1 }}>•</span>
+                            COSMETIC SPECIALISTS <span style={{ color: 'var(--color-accent)', margin: '0 1rem', opacity: 1 }}>•</span>
+                            ADVANCED TECHNOLOGY <span style={{ color: 'var(--color-accent)', margin: '0 1rem', opacity: 1 }}>•</span>
+                            15+ YEARS EXPERIENCE <span style={{ color: 'var(--color-accent)', margin: '0 1rem', opacity: 1 }}>•</span>
+                            500+ HAPPY PATIENTS <span style={{ color: 'var(--color-accent)', margin: '0 1rem', opacity: 1 }}>•</span>
+                        </span>
+                    ))}
+                </div>
+            </div>
 
             {/* Services Highlight Section */}
             <section className="section" style={{
@@ -673,7 +738,7 @@ const Home = () => {
                                     margin: '0 auto 2rem auto',
                                     color: 'var(--color-accent)',
                                     boxShadow: '0 15px 35px rgba(212, 175, 55, 0.15), inset 0 -4px 6px rgba(0,0,0,0.02), inset 0 2px 4px rgba(255,255,255,1)',
-                                    border: '1px solid rgba(255,255,255,1)',
+                                    border: '1px solid rgba(230, 222, 222, 1)',
                                     position: 'relative',
                                     zIndex: 1
                                 }}>
